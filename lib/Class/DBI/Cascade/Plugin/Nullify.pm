@@ -2,7 +2,7 @@ package Class::DBI::Cascade::Plugin::Nullify;
 
 =head1 NAME
 
-Class::DBI::Cascade::Plugin::Nullify - Nullify any related Class::DBI objects
+Class::DBI::Cascade::Plugin::Nullify - Nullify related Class::DBI objects
 
 =head1 SYNOPSIS
 
@@ -12,7 +12,7 @@ Class::DBI::Cascade::Plugin::Nullify - Nullify any related Class::DBI objects
 
 =head1 DESCRIPTION
 
-This is a Cascading Nullify strategy that will Nullify any related Class::DBI objects.
+This is a cascading nullify strategy (i.e. 'on delete set null') that will nullify any related Class::DBI objects.
 
 =cut
 
@@ -21,18 +21,31 @@ use warnings;
 
 use base 'Class::DBI::Cascade::None';
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
+
+
+=head1 METHODS
+
+=over 4
+
+=item cascade
+
+implementation of the cascading nullify strategy.
+
+=back
+
+=cut
 
 sub cascade 
 {
 	my ($self, $obj) = @_;
-	my $foreign_objects = $self->foreign_for($obj);
-	my $foreign_key = $self->{_rel}->args->{foreign_key};
+	my $foreign_objects = $self->foreign_for($obj); #get all foreign objects
+	my $foreign_key = $self->{_rel}->args->{foreign_key}; #get the foreign key
 	
 	while ( my $foreign_object = $foreign_objects->next)
 	{	
-		$foreign_object->$foreign_key(undef);
-		$foreign_object->update();
+		$foreign_object->$foreign_key(undef); #set foreign_key value to null
+		$foreign_object->update(); #update the object
 	}
 }
 

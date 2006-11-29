@@ -5,7 +5,7 @@ use Module::Build;
 my $builder = Module::Build->new(
     module_name         => 'Class::DBI::Cascade::Plugin::Nullify',
     license             => 'perl',
-    dist_author         => 'Xufeng (Danny) Liang <danny@scm.uws.edu.au>',
+    dist_author         => 'Xufeng Liang <danny@scm.uws.edu.au>',
     dist_version_from   => 'lib/Class/DBI/Cascade/Plugin/Nullify.pm',
     requires => {
         'Test::More' => 0,
