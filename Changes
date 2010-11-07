@@ -1,11 +1,5 @@
 Revision history for Class-DBI-Cascade-Plugin-Nullify
 
-0.03    Tues 29 Nov 2006 21:15
-        - Annotated code.
-
-0.02    Tues 28 Nov 2006 19:20
-        - Changed some pod.
-
-0.01    Tues 28 Nov 2006 07:00
-        - Nullify your Class::DBI objects now!
-
+0.04    07/11/2010
+        Update POD.
+        Remove POD test.

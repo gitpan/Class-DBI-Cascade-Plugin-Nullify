@@ -7,12 +7,14 @@ Class::DBI::Cascade::Plugin::Nullify - Nullify related Class::DBI objects
 =head1 SYNOPSIS
 
     package Music::Artist;
-    #define your class here
+    # define your class here
     Music::Artist->has_many(cds => 'Music::CD', {cascade => 'Class::DBI::Cascade::Plugin::Nullify'});
 
 =head1 DESCRIPTION
 
-This is a cascading nullify strategy (i.e. 'on delete set null') that will nullify any related Class::DBI objects.
+This is a cascading nullify strategy (i.e. 'on delete set null') that will nullify any related L<Class::DBI> objects.
+
+THIS MODULE IS NOT LONGER DEVELOPED. Please consider L<Rose::DB::Object> as a alternative to L<Class::DBI>.
 
 =cut
 
@@ -21,7 +23,7 @@ use warnings;
 
 use base 'Class::DBI::Cascade::None';
 
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 
 =head1 METHODS
@@ -30,35 +32,32 @@ our $VERSION = 0.03;
 
 =item cascade
 
-implementation of the cascading nullify strategy.
+implementation of the cascading nullify strategy. 
 
 =back
 
 =cut
 
-sub cascade 
-{
+sub cascade {
 	my ($self, $obj) = @_;
-	my $foreign_objects = $self->foreign_for($obj); #get all foreign objects
-	my $foreign_key = $self->{_rel}->args->{foreign_key}; #get the foreign key
+	my $foreign_objects = $self->foreign_for($obj); # get all foreign objects
+	my $foreign_key = $self->{_rel}->args->{foreign_key}; # get the foreign key
 	
-	while ( my $foreign_object = $foreign_objects->next)
-	{	
-		$foreign_object->$foreign_key(undef); #set foreign_key value to null
-		$foreign_object->update(); #update the object
+	while ( my $foreign_object = $foreign_objects->next) {	
+		$foreign_object->$foreign_key(undef); # set foreign key value to null
+		$foreign_object->update(); # update the object
 	}
 }
 
 =head1 AUTHOR
 
-Xufeng (Danny) Liang danny@scm.uws.edu.au
+Xufeng (Danny) Liang (danny.glue@gmail.com)
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2006 Xufeng (Danny) Liang, All Rights Reserved.
+Copyright 2006-2010 Xufeng (Danny) Liang, All Rights Reserved.
 
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
 
 =cut
 

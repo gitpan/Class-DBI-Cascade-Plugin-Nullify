@@ -1,16 +1,11 @@
 --- #YAML:1.0
 name: Class-DBI-Cascade-Plugin-Nullify
-version: 0.03
+version: 0.04
 author:
-  - Xufeng Liang <danny@scm.uws.edu.au>
+  - Xufeng (Danny) Liang <danny.glue@gmail.com>
 abstract: Nullify related Class::DBI objects
 license: perl
 requires:
+  Test::More: 0
   Class::DBI: 0
   Class::ISA: 0
-  Test::More: 0
-provides:
-  Class::DBI::Cascade::Plugin::Nullify:
-    file: lib/Class/DBI/Cascade/Plugin/Nullify.pm
-    version: 0.03
-generated_by: Module::Build version 0.2609
